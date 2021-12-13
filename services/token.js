@@ -17,7 +17,7 @@ async function checkToken(token) {
       { id: __id, role: user.rol }, // Parametros que van asignados al token
       encodeKey, // Clave de encriptacion
       {
-        expiresIn: '1d', // Tiempo de expiración
+        expiresIn: '3d', // Tiempo de expiración
       }
     );
     return { token, rol: user.rol, id: user.id };
@@ -30,7 +30,7 @@ module.exports = {
   //generar el token
   encode: async (_id) => {
     const token = jwt.sign({ id: _id }, encodeKey, {
-      expiresIn: '1d',
+      expiresIn: '3d',
     });
     return token;
   },
