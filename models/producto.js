@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productoSchema = new Schema({
-  codigo: { type: Number, required: [true, 'Codigo obligatorio'] },
   nombre: { type: String, required: [true, 'Nombre obligatorio'] },
   precio: { type: Number, required: [true, 'Precio'] },
   categoria: String,

@@ -78,7 +78,7 @@ module.exports = {
       const productoDB = await Producto.findByIdAndUpdate(_id, body, {
         new: true,
       });
-      res.json(productoDB);
+      res.status(200).json(productoDB);
     } catch (error) {
       return res.status(500).json({
         mensaje: 'Ocurrio un error',
