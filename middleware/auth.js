@@ -1,4 +1,4 @@
-const jwt = require("../services/token");
+const jwt = require('../services/token');
 
 module.exports = {
   verifyAdmin: async (req, res, next) => {
@@ -8,22 +8,22 @@ module.exports = {
 
         //Verificando el token
         const jwtResponse = await jwt.decode(token);
-        if (jwtResponse.rol == "ADMIN") {
+        if (jwtResponse.rol == 'ADMIN') {
           next();
         } else {
           return res.status(401).json({
-            mensaje: "No autorizado"
+            mensaje: 'No autorizado',
           });
         }
       } else {
         return res.status(404).json({
-          mensaje: "No hay token"
+          mensaje: 'No hay token',
         });
       }
     } catch (error) {
       res.status(500).json({
-        mensaje: "Hubo un error",
-        error
+        mensaje: 'Hubo un error',
+        error,
       });
     }
   },
@@ -39,24 +39,24 @@ module.exports = {
           const _id = req.params.id;
           // Verificando que el usuario que hace la peticion
           // sea al mismo al que se le hará la modificacion.
-          if (_id === jwtResponse.id || jwtResponse.rol === "ADMIN") {
+          if (_id === jwtResponse.id || jwtResponse.rol === 'ADMIN') {
             return next();
           }
         }
 
         return res.status(401).json({
-          mensaje: "No autorizado"
+          mensaje: 'No autorizado',
         });
       } else {
         return res.status(404).json({
-          mensaje: "No hay token"
+          mensaje: 'No hay token',
         });
       }
     } catch (error) {
       res.status(500).json({
-        mensaje: "Hubo un error",
-        error
+        mensaje: 'Hubo un error',
+        error,
       });
     }
-  }
+  },
 };

@@ -1,7 +1,7 @@
-var jwt = require("jsonwebtoken");
-const User = require("../models/user");
+var jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
-const encodeKey = process.env.ENCODE_KEY || "secretKeyToGenerateToken";
+const encodeKey = process.env.ENCODE_KEY || 'secretKeyToGenerateToken';
 
 async function checkToken(token) {
   let __id = null;
@@ -17,7 +17,7 @@ async function checkToken(token) {
       { id: __id, role: user.rol }, // Parametros que van asignados al token
       encodeKey, // Clave de encriptacion
       {
-        expiresIn: "1d" // Tiempo de expiración
+        expiresIn: '1d', // Tiempo de expiración
       }
     );
     return { token, rol: user.rol, id: user.id };
@@ -28,14 +28,14 @@ async function checkToken(token) {
 
 module.exports = {
   //generar el token
-  encode: async _id => {
+  encode: async (_id) => {
     const token = jwt.sign({ id: _id }, encodeKey, {
-      expiresIn: "1d"
+      expiresIn: '1d',
     });
     return token;
   },
   //permite decodificar el token
-  decode: async token => {
+  decode: async (token) => {
     try {
       const { id } = await jwt.verify(token, encodeKey);
       const user = await User.findById({ id });
@@ -48,5 +48,5 @@ module.exports = {
       const newToken = await checkToken(token);
       return newToken;
     }
-  }
+  },
 };

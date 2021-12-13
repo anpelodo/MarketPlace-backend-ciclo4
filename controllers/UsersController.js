@@ -1,6 +1,6 @@
-var bcrypt = require("bcryptjs");
-const Users = require("../models/user");
-const jwt = require("../services/token");
+var bcrypt = require('bcryptjs');
+const Users = require('../models/user');
+const jwt = require('../services/token');
 
 module.exports = {
   // Agrega un nuevo usuario
@@ -10,19 +10,19 @@ module.exports = {
 
     try {
       body.password = await bcrypt.hash(password, 10);
-      body.rol = "USER";
+      body.rol = 'USER';
       const userDB = await Users.create(body);
       if (userDB) {
         res.status(200).json(userDB);
       } else {
         res.status(404).json({
-          mensaje: "No se encontró el usuario"
+          mensaje: 'No se encontró el usuario',
         });
       }
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -31,24 +31,24 @@ module.exports = {
   update: async (req, res) => {
     const _id = req.params.id;
     let body = req.body;
-    body.rol = "USER";
+    body.rol = 'USER';
 
     try {
       const userDB = await Users.findByIdAndUpdate(_id, body, {
-        new: true
+        new: true,
       });
 
       if (userDB) {
         res.status(200).json(userDB);
       } else {
         res.status(404).json({
-          mensaje: "No se encontró el usuario"
+          mensaje: 'No se encontró el usuario',
         });
       }
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -60,8 +60,8 @@ module.exports = {
       res.json(userDB);
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -75,18 +75,18 @@ module.exports = {
 
       if (!userDB) {
         return res.status(404).json({
-          mensaje: "No se encontró el usuario"
+          mensaje: 'No se encontró el usuario',
         });
       } else {
         return res.status(200).json({
           id: _id,
-          status: true
+          status: true,
         });
       }
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -105,19 +105,19 @@ module.exports = {
           res.status(200).json({ user, token: tokenReturn });
         } else {
           res.status(401).send({
-            mensaje: "Password Incorrecto"
+            mensaje: 'Password Incorrecto',
           });
         }
       } else {
         res.status(404).send({
-          mensaje: "No existe el usuario"
+          mensaje: 'No existe el usuario',
         });
       }
     } catch (error) {
       res.status(500).send({
-        mensaje: "ocurrio un error",
-        error
+        mensaje: 'ocurrio un error',
+        error,
       });
     }
-  }
+  },
 };

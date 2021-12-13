@@ -1,4 +1,4 @@
-const Producto = require("../models/producto");
+const Producto = require('../models/producto');
 
 module.exports = {
   // Agrega un producto
@@ -10,8 +10,8 @@ module.exports = {
       res.status(201).json(productoDB);
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -26,8 +26,8 @@ module.exports = {
       return productoDB ? res.json(productoDB) : res.status(204).json({});
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -39,8 +39,8 @@ module.exports = {
       res.json(productoDB);
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -53,18 +53,18 @@ module.exports = {
 
       if (!productoDB) {
         return res.status(400).json({
-          mensaje: "No se encontro el id indicado"
+          mensaje: 'No se encontro el id indicado',
         });
       } else {
         return res.status(200).json({
           id: _id,
-          status: true
+          status: true,
         });
       }
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
   },
@@ -76,14 +76,14 @@ module.exports = {
 
     try {
       const productoDB = await Producto.findByIdAndUpdate(_id, body, {
-        new: true
+        new: true,
       });
       res.json(productoDB);
     } catch (error) {
       return res.status(500).json({
-        mensaje: "Ocurrio un error",
-        error
+        mensaje: 'Ocurrio un error',
+        error,
       });
     }
-  }
+  },
 };
